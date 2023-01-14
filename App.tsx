@@ -1,10 +1,12 @@
 import { StyleSheet, View } from 'react-native'
 import { HomeScreen } from './src/screens/HomeScreen'
+import { RestaurantDetailsScreen } from './src/screens/RestaurantDetailsScreen'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <HomeScreen />
+      {/* <HomeScreen /> */}
+      <RestaurantDetailsScreen />
     </View>
   )
 }
@@ -15,6 +17,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
   },
 })
