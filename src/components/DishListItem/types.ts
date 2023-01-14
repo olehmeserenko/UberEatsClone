@@ -3,6 +3,7 @@ export interface DishListItemPropsType {
 }
 
 export interface Dish {
+  id: string
   name: string
   description: string
   price: number

@@ -1,18 +1,15 @@
-import { StyleSheet, View } from 'react-native'
-import { orders } from './assets/data/orders'
-import { OrderDetailsScreen } from './src/screens/OrderDetailsScreen'
-const order = orders[0]
+import { NavigationContainer } from '@react-navigation/native'
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet } from 'react-native'
+import { RootNavigator } from './src/navigation'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <OrderDetailsScreen order={order} />
-    </View>
+    <NavigationContainer>
+      <RootNavigator />
+      <StatusBar style="light" />
+    </NavigationContainer>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
+const styles = StyleSheet.create({})

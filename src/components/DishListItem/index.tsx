@@ -1,10 +1,16 @@
+import { useNavigation } from '@react-navigation/native'
 import { FC } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import { NavigationProps } from '../../navigation/types'
 import { DishListItemPropsType } from './types'
 
 export const DishListItem: FC<DishListItemPropsType> = ({ dish }) => {
+  const navigation = useNavigation<NavigationProps>()
   return (
-    <View style={styles.container}>
+    <Pressable
+      onPress={() => navigation.navigate('Dish', { id: dish.id })}
+      style={styles.container}
+    >
       <View style={styles.subContainer}>
         <Text style={styles.name}>{dish.name}</Text>
         <Text style={styles.description} numberOfLines={2}>
@@ -15,7 +21,7 @@ export const DishListItem: FC<DishListItemPropsType> = ({ dish }) => {
       {dish.image && (
         <Image source={{ uri: dish.image }} style={styles.image} />
       )}
-    </View>
+    </Pressable>
   )
 }
 

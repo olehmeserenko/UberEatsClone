@@ -1,18 +1,24 @@
+import { useNavigation } from '@react-navigation/native'
 import { FC } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import { NavigationProps } from '../../navigation/types'
 
 import { OrderListItemPropsType } from './types'
 
 export const OrderListItem: FC<OrderListItemPropsType> = ({ order }) => {
+  const navigation = useNavigation<NavigationProps>()
   return (
-    <View style={styles.row}>
+    <Pressable
+      onPress={() => navigation.navigate('Order', { id: order.id })}
+      style={styles.row}
+    >
       <Image source={{ uri: order.Restaurant.image }} style={styles.image} />
       <View>
         <Text style={styles.name}>{order.Restaurant.name}</Text>
         <Text style={styles.price}>3 items &#8226; $38.45</Text>
         <Text>2 days ago &#8226; {order.status}</Text>
       </View>
-    </View>
+    </Pressable>
   )
 }
 

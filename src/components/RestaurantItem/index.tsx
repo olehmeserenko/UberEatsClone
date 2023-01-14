@@ -1,10 +1,19 @@
 import { FC } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+
+import { useNavigation } from '@react-navigation/native'
+
+import { NavigationProps } from '../../navigation/types'
 import { RestaurantItemPropsType } from './types'
 
 export const RestaurantItem: FC<RestaurantItemPropsType> = ({ restaurant }) => {
+  const navigation = useNavigation<NavigationProps>()
+
+  const onPress = () => {
+    navigation.navigate('Restaurant', { id: restaurant.id })
+  }
   return (
-    <View style={styles.restaurantContainer}>
+    <Pressable onPress={onPress} style={styles.restaurantContainer}>
       <Image
         source={{
           uri: restaurant.image,
@@ -23,7 +32,7 @@ export const RestaurantItem: FC<RestaurantItemPropsType> = ({ restaurant }) => {
           <Text>{restaurant.rating}</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   )
 }
 

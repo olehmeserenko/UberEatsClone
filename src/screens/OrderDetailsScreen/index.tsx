@@ -1,14 +1,13 @@
-import { FC } from 'react'
 import { FlatList } from 'react-native'
+import { orders } from '../../../assets/data/orders'
+import { restaurants } from '../../../assets/data/restaurants'
 import { BasketDishItem } from '../../components/BasketDishItem'
 import { Dish } from '../../components/DishListItem/types'
 import { OrderDetailsHeader } from './OrderDetailsScreenHeader'
-import { OrderDetailsScreenPropsType } from './types'
-import { restaurants } from '../../../assets/data/restaurants'
 
-export const OrderDetailsScreen: FC<OrderDetailsScreenPropsType> = ({
-  order,
-}) => {
+const order = orders[0]
+
+export const OrderDetailsScreen = () => {
   return (
     <FlatList
       ListHeaderComponent={() => <OrderDetailsHeader order={order} />}
