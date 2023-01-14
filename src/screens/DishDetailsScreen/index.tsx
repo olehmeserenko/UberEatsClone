@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 
 import { restaurants } from '../../../assets/data/restaurants'
+import { Separator } from '../../components/Separator'
 
 const dish = restaurants[0].dishes[0]
 
@@ -28,7 +29,7 @@ export const DishDetailsScreen = () => {
     <View style={styles.page}>
       <Text style={styles.name}>{dish.name}</Text>
       <Text style={styles.description}>{dish.description}</Text>
-      <View style={styles.separator} />
+      <Separator />
       <View style={styles.row}>
         <AntDesign
           name={'minuscircleo'}
@@ -67,11 +68,6 @@ const styles = StyleSheet.create({
   },
   description: {
     color: 'gray',
-  },
-  separator: {
-    height: 1,
-    backgroundColor: 'lightgrey',
-    marginVertical: 10,
   },
   row: {
     flexDirection: 'row',

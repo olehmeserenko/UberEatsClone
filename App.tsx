@@ -1,10 +1,10 @@
 import { StyleSheet, View } from 'react-native'
-import { BasketScreen } from './src/screens/BasketScreen'
+import { OrdersScreen } from './src/screens/OrdersScreen'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <BasketScreen />
+      <OrdersScreen />
     </View>
   )
 }

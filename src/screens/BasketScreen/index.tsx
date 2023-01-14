@@ -17,7 +17,6 @@ export const BasketScreen = () => {
           <BasketDishItem dish={item as Dish} quantity={2} />
         )}
       />
-      <View style={styles.separator} />
       <View style={styles.button}>
         <Text style={styles.buttonText}>Create Order</Text>
       </View>
@@ -44,11 +43,6 @@ const styles = StyleSheet.create({
   },
   description: {
     color: 'gray',
-  },
-  separator: {
-    height: 1,
-    backgroundColor: 'lightgrey',
-    marginVertical: 10,
   },
   quantity: {
     fontSize: 25,
