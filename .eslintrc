@@ -1,0 +1,57 @@
+{
+  "extends": ["react-app", "prettier", "eslint:recommended"],
+  "globals": {
+    "Audio": true,
+    "Buffer": true,
+    "HTMLVideoElement": true,
+    "JSX": true,
+    "NodeJS": true,
+    "SVGSVGElement": true,
+    "Tranlation": true,
+    "document": true,
+    "translate": true
+  },
+  "overrides": [
+    {
+      "files": ["*.json", ".prettierrc", ".eslintrc"],
+      "rules": {
+        "quote-props": ["error", "always"],
+        "quotes": ["error", "double"]
+      }
+    }
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true,
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "arrow-body-style": ["error", "as-needed"],
+    "no-console": [
+      "error",
+      {
+        "allow": ["debug", "error", "info", "warn", "log"]
+      }
+    ],
+    "no-unused-vars": "error",
+    "object-shorthand": ["error", "always"],
+    "quote-props": ["warn", "consistent-as-needed"],
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true,
+        "avoidEscape": true
+      }
+    ],
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-curly-brace-presence": ["error", "always"],
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "semi": [2, "never"]
+  }
+}
