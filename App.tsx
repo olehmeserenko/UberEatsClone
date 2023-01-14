@@ -1,10 +1,12 @@
 import { StyleSheet, View } from 'react-native'
-import { OrdersScreen } from './src/screens/OrdersScreen'
+import { orders } from './assets/data/orders'
+import { OrderDetailsScreen } from './src/screens/OrderDetailsScreen'
+const order = orders[0]
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <OrdersScreen />
+      <OrderDetailsScreen order={order} />
     </View>
   )
 }
