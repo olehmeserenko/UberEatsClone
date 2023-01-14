@@ -1,12 +1,7 @@
+import { Dish } from '../DishListItem/types'
+
 export interface RestaurantItemPropsType {
   restaurant: Restaurant
-}
-
-interface Dish {
-  name: string
-  description: string
-  price: number
-  image: string
 }
 
 export interface Restaurant {
