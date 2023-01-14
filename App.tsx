@@ -1,10 +1,10 @@
 import { StyleSheet, View } from 'react-native'
-import { DishDetailsScreen } from './src/screens/DishDetailsScreen'
+import { BasketScreen } from './src/screens/BasketScreen'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <DishDetailsScreen />
+      <BasketScreen />
     </View>
   )
 }
