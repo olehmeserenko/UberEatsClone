@@ -1,13 +1,13 @@
 import { FontAwesome5, Foundation, MaterialIcons } from '@expo/vector-icons'
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { NotImplemented } from '../components/NotImplemented'
 import { BasketScreen } from '../screens/BasketScreen'
 import { DishDetailsScreen } from '../screens/DishDetailsScreen'
 import { HomeScreen } from '../screens/HomeScreen'
 import { OrderDetailsScreen } from '../screens/OrderDetailsScreen'
 import { OrdersScreen } from '../screens/OrdersScreen'
+import { ProfileScreen } from '../screens/ProfileScreen'
 import { RestaurantDetailsScreen } from '../screens/RestaurantDetailsScreen'
 import { RootStackParamList } from './types'
 
@@ -17,20 +17,15 @@ export const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={HomeTabs} />
-      <Stack.Screen name="Profile" component={NotImplemented} />
     </Stack.Navigator>
   )
 }
 
-const Tab = createMaterialBottomTabNavigator()
+const Tab = createBottomTabNavigator()
 
 export const HomeTabs = () => {
   return (
-    <Tab.Navigator
-      barStyle={{
-        backgroundColor: 'white',
-      }}
-    >
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
         name="HomeTab"
         component={HomeStackNavigator}
@@ -38,6 +33,7 @@ export const HomeTabs = () => {
           tabBarIcon: ({ color }) => (
             <Foundation name={'home'} size={24} color={color} />
           ),
+          title: 'Home',
         }}
       />
       <Tab.Screen
@@ -47,15 +43,17 @@ export const HomeTabs = () => {
           tabBarIcon: ({ color }) => (
             <MaterialIcons name={'list-alt'} size={24} color={color} />
           ),
+          title: 'Orders',
         }}
       />
       <Tab.Screen
         name="ProfileTab"
-        component={NotImplemented}
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name={'user-alt'} size={24} color={color} />
           ),
+          title: 'Profile',
         }}
       />
     </Tab.Navigator>

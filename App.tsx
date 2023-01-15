@@ -1,9 +1,20 @@
 import { NavigationContainer } from '@react-navigation/native'
+import { Amplify } from 'aws-amplify'
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet } from 'react-native'
+
+import { withAuthenticator } from 'aws-amplify-react-native'
 import { RootNavigator } from './src/navigation'
 
-export default function App() {
+import config from './src/aws-exports'
+
+Amplify.configure({
+  ...config,
+  Analytics: {
+    disabled: true,
+  },
+})
+
+function App() {
   return (
     <NavigationContainer>
       <RootNavigator />
@@ -12,4 +23,4 @@ export default function App() {
   )
 }
 
-const styles = StyleSheet.create({})
+export default withAuthenticator(App)
