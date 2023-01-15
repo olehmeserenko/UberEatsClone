@@ -2,7 +2,6 @@ import { FlatList } from 'react-native'
 import { orders } from '../../../assets/data/orders'
 import { restaurants } from '../../../assets/data/restaurants'
 import { BasketDishItem } from '../../components/BasketDishItem'
-import { Dish } from '../../components/DishListItem/types'
 import { OrderDetailsHeader } from './OrderDetailsScreenHeader'
 
 const order = orders[0]
@@ -12,9 +11,7 @@ export const OrderDetailsScreen = () => {
     <FlatList
       ListHeaderComponent={() => <OrderDetailsHeader order={order} />}
       data={restaurants[0].dishes}
-      renderItem={({ item }) => (
-        <BasketDishItem dish={item as Dish} quantity={2} />
-      )}
+      renderItem={({ item }) => <BasketDishItem dish={item} quantity={2} />}
     />
   )
 }

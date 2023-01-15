@@ -1,4 +1,4 @@
-import { Restaurant } from '../../components/RestaurantItem/types'
+import { Restaurant } from '../../models'
 
 export interface RestaurantDetailsScreenHeaderPropsType {
   restaurant: Restaurant

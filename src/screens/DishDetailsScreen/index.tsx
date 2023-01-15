@@ -1,18 +1,41 @@
-import { useState } from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { useEffect, useState } from 'react'
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native'
 
 import { AntDesign } from '@expo/vector-icons'
 
-import { useNavigation } from '@react-navigation/native'
-import { restaurants } from '../../../assets/data/restaurants'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { DataStore } from 'aws-amplify'
 import { Separator } from '../../components/Separator'
-import { NavigationProps } from '../../navigation/types'
-
-const dish = restaurants[0].dishes[0]
+import { Dish } from '../../models'
+import { NavigationProps, RouteProps } from '../../navigation/types'
 
 export const DishDetailsScreen = () => {
+  const [dish, setDish] = useState<Dish | null>(null)
+
+  const route = useRoute<RouteProps>()
   const navigation = useNavigation<NavigationProps>()
   const [quantity, setQuantity] = useState(1)
+
+  const { id } = route.params as { id: string }
+
+  const fetchDish = async (id: string) => {
+    const response = await DataStore.query(Dish, id)
+    response && setDish(response)
+  }
+
+  useEffect(() => {
+    if (!id) {
+      return
+    }
+
+    fetchDish(id)
+  }, [id])
 
   const onMinus = () => {
     if (quantity > 1) {
@@ -25,7 +48,12 @@ export const DishDetailsScreen = () => {
   }
 
   const getTotal = () => {
+    if (!dish) return
     return (dish.price * quantity).toFixed(2)
+  }
+
+  if (!dish) {
+    return <ActivityIndicator size={'large'} color={'gray'} />
   }
 
   return (

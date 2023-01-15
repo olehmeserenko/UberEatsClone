@@ -1,3 +1,52 @@
+type Basket @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  basketDishes: [BasketDish] @hasMany(indexName: "byBasket", fields: ["id"])
+  userID: ID! @index(name: "byUser")
+  restaurantID: ID! @index(name: "byRestaurant")
+}
+
+enum OrderStatus {
+  NEW
+  COOKING
+  READY_FOR_PICKUP
+  PICKED_UP
+  COMPLETED
+}
+
+type OrderDish @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  quantity: Int!
+  dish: Dish @hasOne
+  orderID: ID! @index(name: "byOrder")
+}
+
+type Order @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  restaurant: Restaurant @hasOne
+  total: Float!
+  status: OrderStatus!
+  orderDishes: [OrderDish] @hasMany(indexName: "byOrder", fields: ["id"])
+}
+
+type BasketDish @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  quantity: Int!
+  dish: Dish @hasOne
+  basketID: ID! @index(name: "byBasket")
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  address: String!
+  lat: Float!
+  lng: Float!
+  orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
+  baskets: [Basket] @hasMany(indexName: "byUser", fields: ["id"])
+  sub: String!
+}
+
 type Dish @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
@@ -18,5 +67,7 @@ type Restaurant @model @auth(rules: [{allow: public}]) {
   address: String!
   lat: Float!
   lng: Float!
-  Dishes: [Dish] @hasMany(indexName: "byRestaurant", fields: ["id"])
+  dishes: [Dish] @hasMany(indexName: "byRestaurant", fields: ["id"])
+  baskets: [Basket] @hasMany(indexName: "byRestaurant", fields: ["id"])
 }
+ 
