@@ -2,6 +2,7 @@ import { FontAwesome5, Foundation, MaterialIcons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import { useAuthContext } from '../context/AuthContext'
 import { BasketScreen } from '../screens/BasketScreen'
 import { DishDetailsScreen } from '../screens/DishDetailsScreen'
 import { HomeScreen } from '../screens/HomeScreen'
@@ -14,9 +15,15 @@ import { RootStackParamList } from './types'
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export const RootNavigator = () => {
+  const { dbUser } = useAuthContext()
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={HomeTabs} />
+      {dbUser ? (
+        <Stack.Screen name="Home" component={HomeTabs} />
+      ) : (
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      )}
     </Stack.Navigator>
   )
 }

@@ -3,6 +3,7 @@ import { Amplify } from 'aws-amplify'
 import { StatusBar } from 'expo-status-bar'
 
 import { withAuthenticator } from 'aws-amplify-react-native'
+import { AuthContextProvider } from './src/context/AuthContext'
 import { RootNavigator } from './src/navigation'
 
 import config from './src/aws-exports'
@@ -17,7 +18,9 @@ Amplify.configure({
 function App() {
   return (
     <NavigationContainer>
-      <RootNavigator />
+      <AuthContextProvider>
+        <RootNavigator />
+      </AuthContextProvider>
       <StatusBar style="light" />
     </NavigationContainer>
   )

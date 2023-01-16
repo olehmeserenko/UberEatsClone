@@ -1,14 +1,59 @@
-import { Auth } from 'aws-amplify'
+import { useNavigation } from '@react-navigation/native'
+import { Auth, DataStore } from 'aws-amplify'
 import { useState } from 'react'
 import { Button, SafeAreaView, StyleSheet, Text, TextInput } from 'react-native'
+import { useAuthContext } from '../../context/AuthContext'
+import { User } from '../../models'
 
 export const ProfileScreen = () => {
-  const [name, setName] = useState('')
-  const [address, setAddress] = useState('')
-  const [lat, setLat] = useState('0')
-  const [lng, setLng] = useState('0')
+  const { dbUser, sub, setDbUser } = useAuthContext()
 
-  const onSave = () => {}
+  const [name, setName] = useState(dbUser?.name || '')
+  const [address, setAddress] = useState(dbUser?.address || '')
+  const [lat, setLat] = useState(dbUser?.lat.toString() || '0')
+  const [lng, setLng] = useState(dbUser?.lng.toString() || '0')
+
+  const navigation = useNavigation()
+
+  const createUser = async () => {
+    try {
+      const user = await DataStore.save(
+        new User({
+          name,
+          address,
+          lat: parseFloat(lat),
+          lng: parseFloat(lng),
+          sub,
+        }),
+      )
+      setDbUser(user)
+    } catch (error) {
+      console.log('Error saving user', error)
+    }
+  }
+
+  const updateUser = async () => {
+    if (!dbUser) return
+
+    const user = await DataStore.save(
+      User.copyOf(dbUser, (updated) => {
+        updated.name = name
+        updated.address = address
+        updated.lat = parseFloat(lat)
+        updated.lng = parseFloat(lng)
+      }),
+    )
+    setDbUser(user)
+  }
+
+  const onSave = async () => {
+    if (dbUser) {
+      await updateUser()
+    } else {
+      await createUser()
+    }
+    navigation.goBack()
+  }
 
   const signOut = () => {
     Auth.signOut()
